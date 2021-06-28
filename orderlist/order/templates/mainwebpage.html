@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Order Page</title>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+<form action="/create-customer/" method="POST">
+{% csrf_token %}
+<input type="submit" name = "create_customers" value="Create Customers">
+</form>
+<form action="/create-product/" method="POST">
+{% csrf_token %}
+<input type="submit" name = "create_Product" value="Create Product">
+</form>
+<br><br><br><br>
+<form><table>
+<tr>
+<td>Customer</td> <td><select name = "customer">
+    {% for cust in customer %}
+    <option value="{{cust.id}}">{{cust.first_name}}</option>
+    {% endfor %}
+</select></td>
+</tr>
+<tr>
+<td>Product </td> <td><select name = "product">
+    {% for pro in product %}
+    <option value="{{pro.id}}">{{pro.name}}</option>
+    {% endfor %}
+</select></td>
+</tr>
+<tr>
+<td>Price </td> <td><input type = "label" name="price"></td>
+</tr>
+<tr>
+<td>Qty</td><td><input type = "text" name="quantity"></td>
+</tr>
+<tr>
+<td>Total </td><td><input type = "label" name="total"></td>
+</tr>
+<tr>
+<td></td><td><input type="button" name="Place order" value = "Place order"> <a href="">Cancel</a></td>
+</tr>
+</table>
+</form>
+</body>   
+</html>
